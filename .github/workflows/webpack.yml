@@ -24,8 +24,8 @@ jobs:
 
     - name: Configure Git identity
       run: |
-        git config --global user.name "bot"
-        git config --global user.email "bot@github.com"
+        git config --global user.name "duomiduole"
+        git config --global user.email "bullball@qq.com"
 
 
     - name: Build
