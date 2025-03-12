@@ -1,7 +1,10 @@
+import Nav from '@/components/nav';
+
+
 const Index = () => {
     return <div>
 
-        this is a report page
+        <Nav />
     </div>
 }
 
