@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  distDir: 'build',
-  basePath: '/build',
+  distDir: 'n',
+  basePath: '/n',
 };
 
 export default nextConfig;

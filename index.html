@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readhot.Top - 知识热点聚合平台</title>
+  <style>
+    :root {
+      --primary-color: #00ff9d;
+      --secondary-color: #00a6ff;
+      --text-color: rgba(255, 255, 255, 0.9);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: var(--text-color);
+    }
+
+    #canvasBg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
+      position: relative;
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .nav-link {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1.2rem;
+      padding: 0.8rem 1.5rem;
+      border: 1px solid var(--primary-color);
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background: var(--primary-color);
+      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px var(--primary-color);
+    }
+
+    .content {
+      max-width: 800px;
+      text-align: center;
+      margin: auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-link {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvasBg"></canvas>
+
+  <div class="container">
+    <nav class="nav-links">
+      <a href="/n/nav" class="nav-link">热点导航</a>
+      <a href="/n/hot" class="nav-link">今日热搜</a>
+      <a href="/n/stock" class="nav-link">股市概览</a>
+      <a href="/n/cctv" class="nav-link">新闻联播</a>
+    </nav>
+
+    <main class="content">
+      <h1>Readhot.Top</h1>
+      <p>汇聚全网信息热点，用AI驱动的内容发现引擎，为您呈现最具价值的趋势信息。实时追踪技术前沿、学术动态和行业洞察，帮助您在信息海洋中快速定位核心信息。</p>
+    </main>
+
+    <div class="footer">
+      Readhot.Top © 2016-<span id="currentYear"></span>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvasBg');
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    const mouse = { x: 0, y: 0, radius: 150 };
+    const MAX_PARTICLES = 150; // 减少粒子数量
+    const OPTIMIZE_DISTANCE = 150 * 150; // 平方距离优化
+
+    // 离屏Canvas缓冲
+    const bufferCanvas = document.createElement('canvas');
+    const bufferCtx = bufferCanvas.getContext('2d');
+
+    function initCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      bufferCanvas.width = canvas.width;
+      bufferCanvas.height = canvas.height;
+
+      // 初始化粒子
+      particles.length = 0;
+      for (let i = 0; i < MAX_PARTICLES; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          dx: (Math.random() - 0.5) * 1.5,
+          dy: (Math.random() - 0.5) * 1.5
+        });
+      }
+    }
+
+    function drawParticles() {
+      // 批量绘制粒子
+      bufferCtx.beginPath();
+      particles.forEach(p => {
+        bufferCtx.moveTo(p.x + 3, p.y);
+        bufferCtx.arc(p.x, p.y, 1, 0, Math.PI * 2);
+      });
+      bufferCtx.fillStyle = 'rgba(0,255,157,0.3)';
+      bufferCtx.fill();
+    }
+
+    function drawLinks() {
+      // 空间分割优化
+      const grid = {};
+      particles.forEach((p, i) => {
+        const x = Math.floor(p.x / 50);
+        const y = Math.floor(p.y / 50);
+        const key = `${x},${y}`;
+        grid[key] = grid[key] || [];
+        grid[key].push(i);
+      });
+
+      bufferCtx.beginPath();
+      particles.forEach((p, i) => {
+        const x = Math.floor(p.x / 50);
+        const y = Math.floor(p.y / 50);
+
+        // 只检查相邻网格
+        for (let dx = -1; dx <= 1; dx++) {
+          for (let dy = -1; dy <= 1; dy++) {
+            const key = `${x + dx},${y + dy}`;
+            if (grid[key]) {
+              grid[key].forEach(j => {
+                if (j <= i) return;
+                const dX = p.x - particles[j].x;
+                const dY = p.y - particles[j].y;
+                const distSq = dX * dX + dY * dY;
+                if (distSq < OPTIMIZE_DISTANCE) {
+                  bufferCtx.moveTo(p.x, p.y);
+                  bufferCtx.lineTo(particles[j].x, particles[j].y);
+                }
+              });
+            }
+          }
+        }
+      });
+      bufferCtx.strokeStyle = 'rgba(0,255,157,0.1)';
+      bufferCtx.lineWidth = 0.5;
+      bufferCtx.stroke();
+    }
+
+    function updateParticles() {
+      particles.forEach(p => {
+        // 鼠标交互
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < mouse.radius * mouse.radius) {
+          const force = (mouse.radius - Math.sqrt(distSq)) / mouse.radius;
+          p.dx += dx * 0.003 * force;
+          p.dy += dy * 0.003 * force;
+        }
+
+        // 速度衰减
+        p.dx *= 0.98;
+        p.dy *= 0.98;
+
+        // 边界处理
+        p.x = (p.x + p.dx + canvas.width) % canvas.width;
+        p.y = (p.y + p.dy + canvas.height) % canvas.height;
+      });
+    }
+
+    function draw() {
+      bufferCtx.fillStyle = 'rgba(0,0,0,0.08)';
+      bufferCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+      updateParticles();
+      drawLinks();
+      drawParticles();
+
+      // 复制缓冲区到主画布
+      ctx.drawImage(bufferCanvas, 0, 0);
+      requestAnimationFrame(draw);
+    }
+
+    // 事件监听优化（节流处理）
+    const updateMouse = (x, y) => {
+      mouse.x = x;
+      mouse.y = y;
+    };
+
+    document.addEventListener('mousemove', e => {
+      requestAnimationFrame(() => {
+        updateMouse(e.clientX, e.clientY);
+      });
+    });
+
+    canvas.addEventListener('click', e => {
+      particles.forEach(p => {
+        const dx = p.x - e.clientX;
+        const dy = p.y - e.clientY;
+        p.dx += dx * 0.1;
+        p.dy += dy * 0.1;
+      });
+    });
+
+    // 初始化
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    draw();
+
+    // 动态年份更新
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
