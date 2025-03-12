@@ -1,0 +1,30 @@
+name: spider
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Install deno
+        uses: denolib/setup-deno@master
+
+      - name: Run deno
+        run: |
+          git config --local user.email "bot@github.com"
+          git config --local user.name "bot"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git pull --rebase
+          deno run --unstable --allow-net --allow-read --allow-write --import-map=src/spider/import_map.json src/spider/index.ts
+          git add .
+          git commit -m "update by github action"
+          git push
