@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Readhot.Top - 热点信息聚合平台</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2F80ED;
+            --secondary: #EB5757;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .error-code {
+            font-size: 150px;
+            font-weight: 600;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            color: #2d3436;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        p {
+            color: #636e72;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(47, 128, 237, 0.3);
+        }
+
+        .astronaut {
+            width: 200px;
+            margin: 0 auto 30px;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 100px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .astronaut {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <svg class="astronaut" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 宇航员SVG矢量图 -->
+            <path
+                d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm144 360c0 13.3-10.7 24-24 24s-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24zm-240-24c-13.3 0-24 10.7-24 24s10.7 24 24 24s24-10.7 24-24s-10.7-24-24-24zm85.2 14.4l-19.6-25.8c-10.7-14.1-30.7-16.7-44.8-6l-38.4 28.8c-1.2.9-2.8 0-2.8-1.6v-57.6c0-8.8 7.2-16 16-16h128c8.8 0 16 7.2 16 16v57.6c0 1.6-1.6 2.5-2.8 1.6l-38.4-28.8c-14.1-10.7-34.1-8.1-44.8 6l-19.6 25.8c-4.8 6.4-14.4 6.4-19.2 0zM384 192c0 70.6-57.4 128-128 128s-128-57.4-128-128s57.4-128 128-128s128 57.4 128 128z"
+                fill="#2F80ED" />
+        </svg>
+
+        <div class="error-code">404</div>
+        <h1>哎呀，页面飞走啦！</h1>
+        <p>我们的小宇航员暂时找不到这个页面，可能是链接有误或页面已被移走</p>
+        <a href="/" class="home-btn">
+            🚀 返回首页
+        </a>
+    </div>
+</body>
+
+</html>
