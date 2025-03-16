@@ -15,4 +15,41 @@ export const DayColors = [
 
 export const backgroundColor = '#144bc5';
 
-export const fontColor = '#fff';
+export const fontColor = '#000';
+
+export const navData = [
+  {
+    "category": "Category 1",
+    "items": [
+      {
+        "icon": "🏠",
+        "title": "首页",
+        "desc": "返回首页",
+        "href": "/home"
+      },
+      {
+        "icon": "🔥",
+        "title": "热点导航",
+        "desc": "查看热点导航",
+        "path": "/nav"
+      }
+    ]
+  },
+  {
+    "category": "Category 2",
+    "items": [
+      {
+        "icon": "📈",
+        "title": "股市概览",
+        "desc": "查看股市概览",
+        "href": "/stock"
+      },
+      {
+        "icon": "📰",
+        "title": "新闻联播",
+        "desc": "查看新闻联播",
+        "href": "/cctv"
+      }
+    ]
+  }
+]
