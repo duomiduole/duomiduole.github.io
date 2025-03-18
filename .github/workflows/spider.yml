@@ -1,0 +1,44 @@
+name: hot search spider
+
+on: 
+  schedule:
+    - cron: '1 * * * *'
+
+jobs:
+  spider:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      - name: Set up Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+    
+      - name: Install dependencies
+        run: |
+          git config --local user.email "bot@github.com"
+          git config --local user.name "bot"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git pull --rebase
+          npm ci
+          
+      - name: Run spider
+        run: |
+          npm run spider
+      - name: Commit and push
+        run: |
+          git config --global user.email "
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "update hot search"
+          git push
