@@ -1,9 +1,3 @@
-import styles from "./page.module.css";
+import Index from '@/app/hot/page';
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      这是首页
-    </div>
-  );
-}
+export default Index;
