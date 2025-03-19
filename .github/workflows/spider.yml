@@ -1,5 +1,8 @@
 name: hot search spider
 
+permissions:
+  contents: write
+  
 on: 
   schedule:
     - cron: '1 * * * *'
