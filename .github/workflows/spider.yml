@@ -37,8 +37,6 @@ jobs:
           npm run spider
       - name: Commit and push
         run: |
-          git config --global user.email "
-          git config --global user.name "github-actions[bot]"
           git add .
           git commit -m "update hot search"
           git push
