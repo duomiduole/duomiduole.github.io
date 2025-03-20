@@ -3,9 +3,6 @@ name: hot search spider
 permissions:
   contents: write
 
-env:
-  TZ: Asia/Shanghai
-  
 on: 
   schedule:
     - cron: '1 * * * *'
@@ -13,6 +10,10 @@ on:
 jobs:
   spider:
     runs-on: ubuntu-latest
+
+    env:
+      TZ: Asia/Shanghai
+  
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
