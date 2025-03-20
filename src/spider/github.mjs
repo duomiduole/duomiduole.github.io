@@ -14,12 +14,12 @@ const weiboDir = path.join(__dirname, '../../raw/weibo');
 const weiboFilePath = path.join(weiboDir, `${moment().format('YYYY-MM-DD')}.json`);
 
 if (!fs.existsSync(weiboFilePath)) {
-    const directory = path.dirname(weiboFilePath);
+    const directory = path.dirname(filePath);
 
       if (!fs.existsSync(directory)) {
         fs.mkdirSync(directory, { recursive: true });
       }
-      fs.writeFileSync(weiboFilePath, '[]');
+      fs.writeFileSync(filePath, '');
 }
 
 const 微博热搜 = 'https://s.weibo.com/top/summary?cate=realtimehot';
@@ -39,7 +39,7 @@ c.add([{
             return;
         }
 
-        const todayWeiboString = fs.readFileSync(weiboFilePath, 'utf-8');
+        const todayWeiboString = fs.readFileSync(weiboFile, 'utf-8');
         const todayWeibo = JSON.parse(todayWeiboString) || [];
 
         const $ = res.$;
@@ -57,7 +57,7 @@ c.add([{
         });
 
         if (todayWeibo.length) {
-            fs.writeFileSync(weiboFilePath, JSON.stringify(todayWeibo, null, 4));
+            fs.writeFileSync(weiboFile, JSON.stringify(todayWeibo, null, 4));
         }
         done();
     }

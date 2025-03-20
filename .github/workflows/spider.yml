@@ -2,6 +2,9 @@ name: hot search spider
 
 permissions:
   contents: write
+
+env:
+  TZ: Asia/Shanghai
   
 on: 
   schedule:
@@ -38,6 +41,9 @@ jobs:
       - name: Run spider
         run: |
           npm run spider
+      - name: Build
+        run: |
+          npm run build
       - name: Commit and push
         run: |
           git add .
