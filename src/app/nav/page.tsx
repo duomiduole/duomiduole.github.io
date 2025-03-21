@@ -17,7 +17,10 @@ const Index = () => {
                     <Row gutter={[16, 16]}>
                         {category?.items?.map((item, idx) => {
                             return <Col xs={12} sm={8} md={6} lg={4} xl={4} key={idx}>
-                                <a href={item?.href} style={{
+                                <a href={item?.href} 
+target='_blank' 
+
+style={{
                                     display: 'block',
                                     textDecoration: 'none',
                                     color: 'inherit',
