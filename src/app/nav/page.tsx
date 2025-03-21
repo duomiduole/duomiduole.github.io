@@ -1,3 +1,5 @@
+'use client'
+
 import { Row, Col } from 'antd';
 import Nav from '@/components/nav';
 
