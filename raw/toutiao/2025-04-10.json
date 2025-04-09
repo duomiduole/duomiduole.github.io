@@ -405,5 +405,11 @@
         "query_word": "多国回复美国说不给鸡蛋",
         "href": "https://www.toutiao.com/trending/7491121486468517386/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%222%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227491121486468517386%22%2C%22hot_board_impr_id%22%3A%22202504100219533845F6586D0608B9D7A9%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22rank%22%3A%2250%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%A4%9A%E5%9B%BD%E5%9B%9E%E5%A4%8D%E7%BE%8E%E5%9B%BD%E8%AF%B4%E4%B8%8D%E7%BB%99%E9%B8%A1%E8%9B%8B%22%7D&rank=50&style_id=40132&topic_id=7491121486468517386",
         "create_time": 1744222793368
+    },
+    {
+        "title": "美国前财长警告美国将陷入衰退",
+        "query_word": "美国前财长警告美国将陷入衰退",
+        "href": "https://www.toutiao.com/trending/7491119978213543465/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227491119978213543465%22%2C%22hot_board_impr_id%22%3A%222025041003121210B3CAE1DCB8417EEDA3%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22rank%22%3A%2246%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%BE%8E%E5%9B%BD%E5%89%8D%E8%B4%A2%E9%95%BF%E8%AD%A6%E5%91%8A%E7%BE%8E%E5%9B%BD%E5%B0%86%E9%99%B7%E5%85%A5%E8%A1%B0%E9%80%80%22%7D&rank=46&style_id=40132&topic_id=7491119978213543465",
+        "create_time": 1744225932739
     }
 ]
